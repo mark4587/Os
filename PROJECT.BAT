@@ -39,7 +39,6 @@ IF ERRORLEVEL 1 GOTO Display User/PC Information
  ECHO C:\batch\logs
  ECHO C:\backup\logs
  ECHO Would you like to see if this Directory Structure exits?
- 
  CHOICE /C 12 /M "1 = Yes, 2=No" 
  IF ERRORLEVEL 2  GOTO MENU 
  IF ERRORLEVEL 1 GOTO Check

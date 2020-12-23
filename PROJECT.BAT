@@ -32,7 +32,13 @@ IF ERRORLEVEL 2 GOTO Check or Create A Directory Structure
 IF ERRORLEVEL 1 GOTO Display User/PC Information
  
 
- 
+:Display User/PC Information
+REM Get current date, time, the username and computername and store them in the variable message
+set message=[%date% : %time% ] Welcome %USERNAME%. You are currently logged onto %COMPUTERNAME%
+REM We inform the user of the details
+echo $message%
+REM Save this information in a log file if it already exists
+IF EXIST C:\batch\logs\logfile.txt echo %message% >> C:\batch\logs\logfile.txt
 
 :Check or Create A Directory Structure 
  ECHO The Directory Structure that we'll be working with today is,

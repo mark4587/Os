@@ -27,7 +27,7 @@ IF ERRORLEVEL 7 GOTO View Folder Permissions
 IF ERRORLEVEL 6 GOTO View File attributes
 IF ERRORLEVEL 5 GOTO File Comparison 
 IF ERRORLEVEL 4 GOTO Backup Logfile
-IF ERRORLEVEL 3 GOTO Create Lofile
+IF ERRORLEVEL 3 GOTO Create Logfile
 IF ERRORLEVEL 2 GOTO Check or Create A Directory Structure
 IF ERRORLEVEL 1 GOTO Display User/PC Information
  
@@ -61,7 +61,10 @@ IF EXIST C:\batch\logs\logfile.txt echo %message% >> C:\batch\logs\logfile.txt
  PAUSE
  GOTO MENU
 
-
+:Create Logfile
+IF NOT EXIST C:\batch\logs\logfile.txt (echo "Creating Logfile") else (echo "Logfile already exists")
+PAUSE
+GOTO MENU
  
 :Backup Logfile
  ECHO ===========================================================================================

@@ -21,7 +21,7 @@ ECHO 9: EXIT
 
 
 CHOICE /C 123456789 /M "Please select an option"
-IF ERRORLEVEL 9 GOTO EXIT
+IF ERRORLEVEL 9 GOTO ExitProgram
 IF ERRORLEVEL 8 GOTO List Non-System processes
 IF ERRORLEVEL 7 GOTO View Folder Permissions 
 IF ERRORLEVEL 6 GOTO View File attributes
@@ -116,3 +116,11 @@ GOTO MENU
  PAUSE 
  GOTO MENU
 
+:ExitProgram
+ REM We do not want to use the Exit Command because it will quit the command prompt itself.
+ REM So instead we just keep this command to the bottom of the file without overtaking..
+ REM ..the flow of control and have it end naturally.
+ ECHO Exiting Program
+ CHOICE /C YN /M "Are you sure you would like to exit "
+ IF %ERRORLEVEL% EQU 1: GOTO MENU
+ IF %ERRORLEVEL% EQU 2: ECHO Exit Confirmed

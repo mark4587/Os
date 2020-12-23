@@ -77,10 +77,12 @@ GOTO MENU
  GOTO MENU
 
 :File Comparison
- echo Comparing current log to backup log
+ ECHO ====================================
+ ECHO Comparing current log to backup log
+ ECHO ====================================
  FC C:\batch\logs\logfile.txt C:\backup\logs\logfile.txt
- pause
- goto MENU
+ PAUSE
+ GOTO MENU
 
  :View File Attributes
  ECHO =============================================================================
@@ -101,8 +103,8 @@ GOTO MENU
     ECHO Returning to Menu.
     GOTO MENU
  ) ELSE (
-    echo Viewing Permissions of C:\Backup
-    icacls C:\Backup
+    ECHO Viewing Permissions of C:\Backup
+    ICACLS C:\Backup
  )
  PAUSE
  GOTO MENU
@@ -120,7 +122,9 @@ GOTO MENU
  REM We do not want to use the Exit Command because it will quit the command prompt itself.
  REM So instead we just keep this command to the bottom of the file without overtaking..
  REM ..the flow of control and have it end naturally.
+ ECHO ================
  ECHO Exiting Program
+ ECHO ================
  CHOICE /C YN /M "Are you sure you would like to exit "
  IF %ERRORLEVEL% EQU 1: GOTO MENU
  IF %ERRORLEVEL% EQU 2: ECHO Exit Confirmed

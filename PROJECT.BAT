@@ -39,6 +39,8 @@ REM We inform the user of the details
 echo $message%
 REM Save this information in a log file if it already exists
 IF EXIST C:\batch\logs\logfile.txt echo %message% >> C:\batch\logs\logfile.txt
+PAUSE
+GOTO MENU
 
 :Check or Create A Directory Structure 
  ECHO The Directory Structure that we'll be working with today is,
@@ -73,6 +75,12 @@ GOTO MENU
  XCOPY C:\batch\logs\logfile.txt C:\backup\logs\logifle.txt
  PAUSE  
  GOTO MENU
+
+:File Comparison
+ echo Comparing current log to backup log
+ FC C:\batch\logs\logfile.txt C:\backup\logs\logfile.txt
+ pause
+ goto MENU
 
  :View File Attributes
  ECHO =============================================================================

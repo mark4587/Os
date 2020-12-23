@@ -90,6 +90,23 @@ GOTO MENU
  PAUSE
  GOTO MENU
 
+ :View Folder Permissions
+ ECHO =============================================================================
+ ECHO Viewing Folder Permissions
+ ECHO =============================================================================
+ REM We cannot check the permissions of a folder that does not exist
+ IF NOT EXIST C:\backup (
+    ECHO Backup Folder does not exist.
+    ECHO You may create it with option 2.
+    ECHO Returning to Menu.
+    GOTO MENU
+ ) ELSE (
+    echo Viewing Permissions of C:\Backup
+    icacls C:\Backup
+ )
+ PAUSE
+ GOTO MENU
+
 
  :List Non-System Processes
  ECHO ========================================================
@@ -98,6 +115,4 @@ GOTO MENU
  TASKLIST
  PAUSE 
  GOTO MENU
-
-
 

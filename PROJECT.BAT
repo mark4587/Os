@@ -21,18 +21,26 @@ ECHO 9: EXIT
 
 
 CHOICE /C 123456789 /M "Please select an option"
-IF ERRORLEVEL 9 GOTO EXIT
+IF ERRORLEVEL 9 GOTO ExitProgram
 IF ERRORLEVEL 8 GOTO List Non-System processes
 IF ERRORLEVEL 7 GOTO View Folder Permissions 
 IF ERRORLEVEL 6 GOTO View File attributes
 IF ERRORLEVEL 5 GOTO File Comparison 
 IF ERRORLEVEL 4 GOTO Backup Logfile
-IF ERRORLEVEL 3 GOTO Create Lofile
+IF ERRORLEVEL 3 GOTO Create Logfile
 IF ERRORLEVEL 2 GOTO Check or Create A Directory Structure
 IF ERRORLEVEL 1 GOTO Display User/PC Information
  
 
- 
+:Display User/PC Information
+REM Get current date, time, the username and computername and store them in the variable message
+set message=[%date% : %time% ] Welcome %USERNAME%. You are currently logged onto %COMPUTERNAME%
+REM We inform the user of the details
+echo $message%
+REM Save this information in a log file if it already exists
+IF EXIST C:\batch\logs\logfile.txt echo %message% >> C:\batch\logs\logfile.txt
+PAUSE
+GOTO MENU
 
 :Check or Create A Directory Structure 
  ECHO The Directory Structure that we'll be working with today is,
@@ -55,7 +63,10 @@ IF ERRORLEVEL 1 GOTO Display User/PC Information
  PAUSE
  GOTO MENU
 
-
+:Create Logfile
+IF NOT EXIST C:\batch\logs\logfile.txt (echo "Creating Logfile") else (echo "Logfile already exists")
+PAUSE
+GOTO MENU
  
 :Backup Logfile
  ECHO ===========================================================================================
@@ -65,11 +76,36 @@ IF ERRORLEVEL 1 GOTO Display User/PC Information
  PAUSE  
  GOTO MENU
 
+:File Comparison
+ ECHO ====================================
+ ECHO Comparing current log to backup log
+ ECHO ====================================
+ FC C:\batch\logs\logfile.txt C:\backup\logs\logfile.txt
+ PAUSE
+ GOTO MENU
+
  :View File Attributes
  ECHO =============================================================================
  ECHO The files/directory structure that we'll be using is C:\batch\logs\logfile.txt
  ECHO =============================================================================
  DIR C:\batch\logs\logfile.txt
+ PAUSE
+ GOTO MENU
+
+ :View Folder Permissions
+ ECHO =============================================================================
+ ECHO Viewing Folder Permissions
+ ECHO =============================================================================
+ REM We cannot check the permissions of a folder that does not exist
+ IF NOT EXIST C:\backup (
+    ECHO Backup Folder does not exist.
+    ECHO You may create it with option 2.
+    ECHO Returning to Menu.
+    GOTO MENU
+ ) ELSE (
+    ECHO Viewing Permissions of C:\Backup
+    ICACLS C:\Backup
+ )
  PAUSE
  GOTO MENU
 
@@ -82,5 +118,13 @@ IF ERRORLEVEL 1 GOTO Display User/PC Information
  PAUSE 
  GOTO MENU
 
-
-
+:ExitProgram
+ REM We do not want to use the Exit Command because it will quit the command prompt itself.
+ REM So instead we just keep this command to the bottom of the file without overtaking..
+ REM ..the flow of control and have it end naturally.
+ ECHO ================
+ ECHO Exiting Program
+ ECHO ================
+ CHOICE /C YN /M "Are you sure you would like to exit "
+ IF %ERRORLEVEL% EQU 1: GOTO MENU
+ IF %ERRORLEVEL% EQU 2: ECHO Exit Confirmed

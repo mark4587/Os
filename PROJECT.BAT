@@ -4,9 +4,6 @@ ECHO Program Purpose: To list files starting with M, have an extenstion of .Exe 
 ECHO Author: David Darigan and Mark Doyle
 ECHO Date Written: To be entered
 
-ECHO Hello %USERNAME% , You're currently looged into %COMPUTERNAME%
-ECHO The Time is %TIME%
-ECHO The Date is %DATE%
 
 :MENU
 ECHO =======================================================================
@@ -34,14 +31,7 @@ IF ERRORLEVEL 3 GOTO Create Lofile
 IF ERRORLEVEL 2 GOTO Check or Create A Directory Structure
 IF ERRORLEVEL 1 GOTO Display User/PC Information
  
- :Display User/PC Information
- ECHO As you know today's time and date is,
- ECHO %Time%
- ECHO %DATE%
- ECHO Your System Information is:
- SYSTEMINFO
- PAUSE
- GOTO MENU
+
  
 
 :Check or Create A Directory Structure 
@@ -93,12 +83,5 @@ IF ERRORLEVEL 1 GOTO Display User/PC Information
  PAUSE 
  GOTO MENU
 
- :END 
- GOTO MENU
 
 
- :EXIT
- ECHO ARE YOU SURE YOU WANT TO LEAVE?. 
- CHOICE /C YN  /M "Y for Yes, N for No"
- IF %ERRORLEVEL% EQU N GOTO MENU 
- IF %ERRORLEVEL% EQU Y EXIT

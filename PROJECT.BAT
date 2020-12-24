@@ -36,7 +36,7 @@ IF ERRORLEVEL 1 GOTO Display User/PC Information
 REM Get current date, time, the username and computername and store them in the variable message
 set message=[%date% : %time% ] Welcome %USERNAME%. You are currently logged onto %COMPUTERNAME%
 REM We inform the user of the details
-echo $message%
+echo %message%
 REM Save this information in a log file if it already exists
 IF EXIST C:\batch\logs\logfile.txt echo %message% >> C:\batch\logs\logfile.txt
 PAUSE
@@ -138,5 +138,6 @@ GOTO MENU
  ECHO Exiting Program
  ECHO ================
  CHOICE /M "Are you sure you would like to exit "
+ REM Yes = 1, No = 2
  IF ERRORLEVEL 2 GOTO MENU
- IF ERRORLEVEL 1 ECHO Exit Confirmed
+ IF ERRORLEVEL 1 ECHO Exiting Confirmed

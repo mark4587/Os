@@ -138,5 +138,6 @@ GOTO MENU
  ECHO Exiting Program
  ECHO ================
  CHOICE /M "Are you sure you would like to exit "
+ REM Yes = 1, No = 2
  IF ERRORLEVEL 2 GOTO MENU
- IF ERRORLEVEL 1 ECHO Exit Confirmed
+ IF ERRORLEVEL 1 ECHO Exiting Confirmed

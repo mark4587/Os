@@ -64,7 +64,19 @@ GOTO MENU
  GOTO MENU
 
 :Create Logfile
-IF NOT EXIST C:\batch\logs\logfile.txt (echo "Creating Logfile") else (echo "Logfile already exists")
+IF NOT EXIST C:\batch\logs\ (
+   ECHO Required directory path C:\batch\logs does not exist. You may create it with option 2.
+   REM We cut this off early because the next condition implicitly assumes this path exists
+   PAUSE
+   GOTO MENU
+)
+IF NOT EXIST C:\batch\logs\logfile.txt (
+   ECHO Creating Logfile
+   TYPE nul > C:\batch\logs\logfile.txt
+   ECHO Created Logfile
+) ELSE (
+   ECHO Logfile already exists
+)
 PAUSE
 GOTO MENU
  
@@ -125,6 +137,6 @@ GOTO MENU
  ECHO ================
  ECHO Exiting Program
  ECHO ================
- CHOICE /C YN /M "Are you sure you would like to exit "
- IF %ERRORLEVEL% EQU 1: GOTO MENU
- IF %ERRORLEVEL% EQU 2: ECHO Exit Confirmed
+ CHOICE /M "Are you sure you would like to exit "
+ IF ERRORLEVEL 2 GOTO MENU
+ IF ERRORLEVEL 1 ECHO Exit Confirmed

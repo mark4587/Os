@@ -126,7 +126,7 @@ GOTO MENU
  ECHO ========================================================
  ECHO I'm now going to show you a list of Non-System Processes.
  ECHO ========================================================
- TASKLIST
+ TASKLIST /FI "USERNAME ne NT AUTHORITY\SYSTEM" /FI "STATUS eq running"
  PAUSE 
  GOTO MENU
 

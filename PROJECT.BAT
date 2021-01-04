@@ -84,7 +84,7 @@ GOTO MENU
  ECHO ===========================================================================================
  ECHO I'm now going to backup the contents of C:\batch\logs folder and place it in C:\backup\logs
  ECHO ===========================================================================================
- XCOPY C:\batch\logs\logfile.txt C:\backup\logs\logifle.txt
+ COPY C:\batch\logs\logfile.txt C:\backup\logs\logfile.txt
  PAUSE  
  GOTO MENU
 

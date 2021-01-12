@@ -19,7 +19,7 @@ ECHO 7: View Folder Permissions
 ECHO 8: List Non-System Processes
 ECHO 9: EXIT
 
-
+REM This prompts the user with a menu of options to choose from.
 CHOICE /C 123456789 /M "Please select an option"
 IF ERRORLEVEL 9 GOTO ExitProgram
 IF ERRORLEVEL 8 GOTO List Non-System processes
@@ -123,6 +123,7 @@ GOTO MENU
 
 
  :List Non-System Processes
+ REM We list the NON-SYSTEM-PROCESSES instead of the ordineary system processes
  ECHO ========================================================
  ECHO I'm now going to show you a list of Non-System Processes.
  ECHO ========================================================
